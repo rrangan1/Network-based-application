@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>HomePage</title>
+
+    <link href="Stylesheet.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    
+        <%include partials/header.ejs %>
+        <%include partials/user-navigation.ejs %>
+        <div id="main-wrap">
+        <div id="navbar">
+        <%include partials/site-navigation.ejs %>
+        </div>
+        <div id="content-wrap">
+            <div class="about">
+                <div>
+                    In the history of entertainment, there has never
+                    been so much available at your streaming fingertips,
+                    no matter where your tastes may lie. In fact, there’s
+                    so much to see that it can be difficult to figure out which
+                    streaming service (or services) best fits your needs.
+                    <div class="image">
+                            <img src="countdown.gif" alt="" height=140 width=230> 
+                    </div>
+                </div>
+                <div>
+                    <strong>Price:</strong> $8 per month for one screen at a time in standard definition,
+                    $11 per month for two screens in HD, $14 per month for four screens
+                    in 4K Ultra HD (including select titles in high dynamic range (HDR)
+                    and Dolby Atmos audio).
+                </div>
+                <div>
+                    <strong>Supported devices:</strong> Pretty much everything, from gaming consoles to streaming
+                    boxes to smart TVs and smartphones. Nearly every device and every app store
+                    has a Netflix app, and it’s even a quick key on most modern TV remotes.
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <%include partials/footer.ejs %>
+</body>
+
+</html>

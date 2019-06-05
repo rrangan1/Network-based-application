@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>My Movie List</title>
+    <link rel="stylesheet" type="text/css" href='/Stylesheet.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <%include partials/header.ejs %>
+
+    <%include partials/user-navigation.ejs %>
+    <div id="main-wrap">
+        <div id="navbar">
+            <%include partials/site-navigation.ejs %>
+        </div>
+
+        <div id="content-wrap">
+            <div class="content">
+                <h2>
+                    <B>Movie List</B>
+                </h2>
+
+                <table class="tabStyle">
+                    <tr>
+                        <th class="thStyle">Movie Name</th>
+                        <th class="thStyle">Category</th>
+                        <th class="thStyle">Rating</th>
+                        <th class="thStyle">Seen it</th>
+                        <th></th>
+                    </tr>
+
+                    <% for(var i=0; i < userProfile._userItems.length;i++){
+                        for(var j=0; j< item.length;j++){
+                          if(item[j]._movieCode == userProfile._userItems[i]._itemCode){
+                            
+                              %>
+                    <tr>
+
+                        <td><%=item[j]._movieName%></td>
+                        <td><%= item[j]._catalogCategory%></td>
+                        <td>
+                            <%console.log("rating",userProfile._userItems[i]._rating)%>
+                            <% for (var z=0 ; z< userProfile._userItems[i]._rating ;z++){%>
+                                <span class="fa fa-star checked"></span>
+                              <% }  %>
+                        </td>
+                        <%   if(userProfile._userItems[i]._seenIt){%>
+                        <td><input type="checkbox" value="_seenIt" checked> </td>
+                        <% }else{%>
+                        <td><input type="checkbox" value="_seenIt"></td>
+                        <%}%>
+              
+                        <td>
+                                <form action="/userProfile/updateProfile" method="POST">
+                                    <input type="hidden" value=<%=userProfile._userItems[i]._itemCode %> name="movieCode">
+                                    <input type="hidden" value=<%= JSON.stringify(userProfile._userItems) %> name="movieList">
+                                    <input type="submit" name="action" value="Update">
+                        </form>
+                        </td>
+                        <td>
+                            <form action="/userProfile/deleteItem" method="POST">
+                                <input type="hidden" name="movieList"  value=<%= JSON.stringify(userProfile._userItems)%>>
+                                <input type="hidden" name="movieCode" value=<%=userProfile._userItems[i]._itemCode %> >
+                                <input type="submit" name="action" value="Delete"> 
+                            </form>
+                        </td>
+                    </tr>
+                    <% 
+                }
+                }
+                }
+              %>
+
+                </table>
+
+                <div class="myItemsBottomContent">
+                    <p>
+                        <i class="fa fa-archive"></i> indicates that this movie belongs to you.
+                    </p>
+                    <p>Click <a href="">Here</a> to share a new movie.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%include partials/footer.ejs %> </body>
+
+</html>

@@ -1,0 +1,66 @@
+    <!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Categories</title>
+    <link rel="stylesheet" type="text/css"  href='/Stylesheet.css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    
+</head>
+
+<body>
+    <%include partials/header.ejs %>
+
+    <%include partials/user-navigation.ejs %>
+    <div id="main-wrap">
+        <div id="navbar">
+            <%include partials/site-navigation.ejs %>
+        </div>
+        <div id="content-wrap">
+               <div class="content">
+            <div>
+                <%
+                      
+                        for(var i=0; i< data.categories.length; i++){ %>
+                <table class="cat-table">
+                    <thead>
+                        <tr>
+                            <th class="cat-heading"><%= data.categories[i] %></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                               
+                                    for(var j=0; j< data.items.length;j++){
+                                        if(data.categories[i] === data.items[j].catalogCategory){ 
+                                            %>
+                        <tr>
+                            <td class="cat-items">
+                                    
+                                    <img src=<%= data.items[j].imageURL %> alt="" height=100 width=100>
+                                <a href="/categories/item/<%= data.items[j].movieCode %>"><%= data.items[j].movieName %></a>
+                            </td>
+                        </tr>
+                        <% }
+                                    }
+                                     %>
+                    </tbody>
+                </table>
+                <% }%>
+            </div>
+
+        </div>
+    </div>
+
+    
+    </div>
+
+    <%include partials/footer.ejs %>
+</body>
+
+</html>

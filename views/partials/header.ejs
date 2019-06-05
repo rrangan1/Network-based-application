@@ -1,0 +1,13 @@
+<header>
+        <% 
+        if (isSignIn)
+        {
+         %>
+    <div class="placeholder">Welcome <%= theUser._firstName %></div>
+    <%}else{%>
+        <div class="placeholder">Not Signed In</div>
+        <%}%>
+   
+    <div class="HeadingTitle">Online Movies</div>
+   
+</header>

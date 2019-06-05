@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>HomePage</title>
+    <link rel="stylesheet" type="text/css" href='/Stylesheet.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+
+<body>
+    <%include partials/header.ejs %>
+    <%include partials/user-navigation.ejs %>
+    <div id="main-wrap">
+        <div id="navbar">
+            <%include partials/site-navigation.ejs %>
+        </div>
+        <div id="content-wrap">
+            <div class="content">
+                <div class="item-feedback">
+                    Give your feedback for
+                </div>
+
+                <div class="item">
+                   
+                    <%
+                    for(var i=0; i < item.length;i++){
+                        if(theItem._itemCode == item[i]._movieCode){
+                    %>
+                    <img src=<%= item[i].imageURL%> alt="" height=200 width=200>
+                </div>
+
+                <div class="item-title">
+
+                    <p><%=item[i]._movieName%></p>
+                </div>
+                <div class="item-series">
+                    <p><%=item[i]._catalogCategory%></p>
+                    <%
+                }
+              }
+              %>
+
+                    <div class="buttons">
+                        <form action="/userprofile/updateRating" method="POST">
+                            <input type="hidden" name="movieList" value="<%= item %>">
+                            <input type="hidden" name="movieCode" value="<%=  theItem._itemCode %>">
+                            <strong>Rating :</strong>
+                            <select  name="rating">
+                               
+                                <option value="0 Star" <%if(theItem._rating == 0){%>selected<%}%>>0 Star</option>
+                                <option value="1 Star"<%if(theItem._rating == 1){%>selected<%}%>>1 Star ✯</option>
+                                <option value="2 Star"<%if(theItem._rating == 2){%>selected<%}%>>2 Star ✯✯</option>
+                                <option value="3 Star"<%if(theItem._rating == 3){%>selected<%}%>>3 Star ✯✯✯</option>
+                                <option value="4 Star" <%if(theItem._rating == 4){%>selected<%}%>>4 Star ✯✯✯✯</option>
+                                <option value="5 Star"<%if(theItem._rating == 5){%>selected<%}%>>5 Star ✯✯✯✯✯</option>
+                            </select>
+                           
+                            <input type="submit" name="action" class="button" value="Confirm Rating"><br>
+                        </form>
+                        <div>
+                            <form action="/userprofile/updateFlag" method="POST">
+                                <input type="hidden" name="movieList" value="<%= item %>">
+                                <input type="hidden" name="movieCode" value="<%=  theItem._itemCode %>">
+                                <input type="radio" id="read_yes" name="seenIt" value="true" <%if(theItem._seenIt == true){%>checked<%}%>/>Yes
+                                <input type="radio" id="read_no" name="seenIt" value="false" <%if(theItem._seenIt == false){%>checked<%}%>/>No
+                                <input type="submit" name="action" value="I watched it ✓"> 
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+                <%
+                for(var i=0; i < item.length;i++){
+                    if(theItem._itemCode == item[i]._movieCode){
+                %>
+                <div class="feedback-item-content">
+                    <p><%=item[i]._description%></p>
+
+                </div>
+                <%
+            }
+          }
+          %>
+            </div>
+
+         
+        </div>
+    </div>
+
+
+
+    <%include partials/footer.ejs %>
+</body>
+
+</html>

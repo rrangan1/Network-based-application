@@ -1,0 +1,13 @@
+<div class="topnav" id="myTopnav">
+  <%
+    if (isSignIn)
+    {%>
+      <a href="/userprofile/signout">Sign Out</a>       
+       <%}else{%>
+        <a href="/userprofile/signin">Sign In</a>
+   <% }%>
+          
+    <a href="/userprofile/myitems">My Movie List</a>
+    <a href="#contact">Genre</a>
+    <i class="fa fa-bars"></i>
+</div>

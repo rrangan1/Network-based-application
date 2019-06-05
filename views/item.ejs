@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>My Movie List</title>
+    <link rel="stylesheet" type="text/css"  href='/Stylesheet.css'/>    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <%include partials/header.ejs %>
+    <%include partials/user-navigation.ejs %>
+    <div id="main-wrap">
+        <div id="navbar">
+            <%include partials/site-navigation.ejs %>
+        </div>
+        <div id="content-wrap">
+            <div class="content">
+            <a href="/categories" class="return-category">← Return to Category</a>
+            <div>
+                <table class="item-heading-table">
+                    <tr>
+                        <td><img src='<%= data.item.imageURL %>' alt="lucifier" class="item-photo" height=200 width=200></td>
+                        <td><h2><%= data.item.movieName %></h2><span class="item-info">Genre : <%= data.item.genre %>
+                        <span >,Category :<%= data.item.catalogCategory %></span> </span>
+
+                            <table>
+                                <tr><td> 
+                                        <% 
+                                          for (var i = 0; i< data.item.rating; i++) { %>
+                                            <span class="fa fa-star checked"></span>
+                                           <%  }
+                                              %>
+                                    
+                             </td></tr>
+                                <tr><td> 
+                                                                  
+                                        <form action="/userprofile/save" method="POST">
+                                            <input type="hidden" value=<%= data.item.movieCode %> name="movieCode">
+                                            <input type="hidden" value=<%= JSON.stringify(data.item.movieCode) %> name="movieList">
+                                                <input type="submit" name="action" value=" ♥ Save it">                                               
+                                            </form>
+                                        </td>
+                                     <td>  
+                                            <form action="/userprofile/updateProfile" method="POST">
+                                                <% console.log(data.item.movieCode )%>
+                                                <% console.log(JSON.stringify(data.item) )%>
+                                                <input type="hidden" value=<%= data.item.movieCode %> name="movieCode">
+                                                <input type="hidden" value=<%= JSON.stringify(data.item.movieCode) %> name="movieList">
+                                                <input type="submit" name="action" value="✪ Rate it">
+                                            </form>
+                                        </td>
+                                   </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="item-content">
+                
+                    <p> Description :<%= data.item.description %></p>
+               
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <%include partials/footer.ejs %>
+</body>
+
+</html>
